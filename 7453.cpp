@@ -16,6 +16,7 @@ int main() {
         cin>>arr[2][i];
         cin>>arr[3][i];
     }
+    
     for (int i =0; i<n; i++) {
         for (int j =0; j<n; j++) {
             second.push_back(arr[2][i] + arr[3][j]);

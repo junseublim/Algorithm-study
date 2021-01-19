@@ -64,6 +64,8 @@ int main() {
             an[j][i] = an[temp][i-1]; //sparse table   
         }
     }
+    
+    cout<<endl;
     cin>>m;
     for (int i =0; i<m; i++) {
         int a,b;

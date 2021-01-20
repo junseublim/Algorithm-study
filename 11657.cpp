@@ -34,12 +34,14 @@ int main() {
     }
     for (int i =0; i<n-1; i++) {
         for (auto x: v) {
+            if (dest[x.s] == INF) continue; 
             if (dest[x.d] > dest[x.s] + x.w) {
                 dest[x.d] = dest[x.s] + x.w;
             }
         }
     }
     for (auto x: v) {
+        if (dest[x.s] == INF) continue; 
         if (dest[x.d] > dest[x.s] + x.w) {
             cout<<-1<<endl;
             return 0;

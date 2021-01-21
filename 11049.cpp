@@ -7,6 +7,9 @@ vector<pii> v;
 const int INF = 987654321; 
 int m[500][500];
 int main() {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
     cin>>n;
     for ( int i=0; i<n; i++) {
         int a,b;

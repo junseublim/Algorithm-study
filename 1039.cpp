@@ -5,58 +5,63 @@ using namespace std;
 string n;
 int k;
 string answer = "";
-
-int findBiggest(int pos) {
-    char b = n[pos];
-    int index = pos;
-    for (int i = pos+1; i<n.size(); i++) {
-        if (n[i]> b) {
-            b =n[i];
-            index = i;
-        }
-        
-    }
-    return index;
+bool visited[1000001][11];
+queue<pair<string, int> > q;
+int biggest = 0;
+void swap (char* a, char* b) {
+    char temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
-void getMax(int pos) {
-    if (k == 0) return;
-    if (pos == n.size()-1) {
-        if (pos-1 == 0 && n[pos] == '0' ) {
-            n.clear();
-            n =  "-1";
-            return;
-        } 
-        char temp = n[pos];
-        n[pos] = n[pos-1];
-        n[pos-1] = temp;
-        k--;
-        getMax(pos);
+void dfs(string cur, int currIdx, int cnt) {
+    if (cnt == k) {
+        int num = atoi(cur.c_str());
+        if (num > biggest)  biggest = num;
+        return;
     }
-    int biggestIdx = findBiggest(pos);
-    if (pos == 0) {
-        if (n[biggestIdx] == '0') {
-            n = "-1";
-            return;
-        }
+    for (int i =0; i<n.size(); i++) {
+        if (i == currIdx) continue;
+        swap(n[i], n[currIdx]);
     }
-    
-    if (pos != biggestIdx) {
-        char temp = n[pos];
-        n[pos] = n[biggestIdx];
-        n[biggestIdx] = temp;
-        k--;
-    }
-     getMax(pos+1);
-   
-
 }
 
 int main() {
 
     cin>>n;
     cin>>k;
-    getMax(0);
-    cout<<n<<endl;
+    q.push(make_pair(n,0));
+    while (!q.empty()) {
+        pair<string, int> psi = q.front();
+        q.pop();
+        string num = psi.first;
+        int numint = atoi(num.c_str());
+        int cnt = psi.second;
+        //cout<<numint<<" "<<cnt<<endl;
+        if (cnt == k) {
+            if (numint > biggest) biggest = numint;
+            continue;
+        }
+        for (int i =0; i<n.size(); i++) {
+            for (int j =0; j<n.size(); j++) {
+                if (i == j) continue;
+                if (i ==0 && n[j]=='0') continue;
+                if (j ==0 && n[i]=='0') continue;
+                string nxt = num;
+                swap(&nxt[i], &nxt[j]);
+                int nxtint = atoi(nxt.c_str());
+                //cout<<"nxtint : "<<nxtint<<endl;
+                if (!visited[nxtint][cnt+1]) {
+                    visited[nxtint][cnt+1] = true;
+                    q.push(make_pair(nxt,cnt+1));
+                }
+            }
+        }
+    }
+    if (biggest == 0) {
+        cout<<-1<<endl;
+    }
+    else cout<<biggest<<endl;
+    
 
 }

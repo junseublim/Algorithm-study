@@ -28,8 +28,8 @@ int main() {
             cin>>x;
             //cout<<n<<" "<<(1<<x)<<endl;
             if (n&(1<<x)) 
-                cout<<1<<endl;
-            else cout<<0<<endl;
+                cout<<1<<"\n";
+            else cout<<0<<"\n";
         }
         else if (cmd == "toggle") {
             cin>>x;
@@ -38,7 +38,6 @@ int main() {
         else if (cmd == "empty") {
             n= 0;
         }
-        //cout<<n<<endl;
     }
     
 }

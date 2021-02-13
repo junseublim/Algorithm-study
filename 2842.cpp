@@ -100,60 +100,42 @@ int main() {
 
     int a = 0;
     int b = allHeights.size()-1;
-    int maxAv = b;
-    int minAv = 0;
-    // while(a<=b) {
-    //     int middle = (a+b) /2;
-    //     visited.assign(n,vector<int>(n,0));
-    //     int ans = smaller(PY,PX, allHeights[middle]);
-    //     if (ans == houseCount) {
-    //         maxAv = middle;
-    //         b = middle - 1;
-    //     }
-    //     else {
-    //         a = middle + 1;
-    //     }
-    // }
-    // a = 0;
-    // b = allHeights.size()-1;
-    // int minAv = 0;
-    // while(a<=b) {
-    //     int middle = (a+b) /2;
-    //      visited.assign(n,vector<int>(n,0));
-    //     int ans = bigger(PY,PX, allHeights[middle]);
-    //     if (ans == houseCount) {
-    //         minAv = middle;
-    //         a = middle + 1;
-    //     }
-    //     else {
-    //         b = middle - 1;
-    //     }
-    // }
-    // cout<<allHeights[maxAv]<<endl;
-    // cout<<allHeights[minAv]<<endl;
-    int minimum = 0;
-    int maximum = maxAv;
-    for (int i = maxAv; i < allHeights.size(); i++) {
-        int minTemp = -1;
-        for(int j= minAv; j > minimum; j--) {
-            //cout<<"current: "<<allHeights[i]<<" " <<allHeights[j]<<endl;
-            visited.assign(n,vector<int>(n,0));
-            int ans = dfs(PY,PX, allHeights[j], allHeights[i]);
-            if (ans == houseCount) {
-                //cout<<"found: "<<allHeights[i]<<" " <<allHeights[j]<<endl;
-                minTemp = j;
-                break;
-            }
+    int maxAv = 0;
+    while(a<=b) {
+        int middle = (a+b) /2;
+        visited.assign(n,vector<int>(n,0));
+        int ans = smaller(PY,PX, allHeights[middle]);
+        if (ans == houseCount) {
+            maxAv = middle;
+            b = middle - 1;
         }
-        if (minTemp != -1) {
-            if (allHeights[maximum]-allHeights[minimum] > allHeights[i]-allHeights[minTemp]){
-                maximum = i;
-                minimum = minTemp;
+        else {
+            a = middle + 1 ;
+        }
+    }
+    int diff = -1;
+    for (int i = maxAv; i<allHeights.size();i++) {
+        int c;
+        if (diff == -1) c= 0;
+        else c = allHeights[i] - diff;
+        int d = allHeights[i];
+        while (c<=d) {
+            //cout<<"inner while c: "<<c<<", d: "<<d<<endl;
+            int middle2 = (c+d)/2;
+            visited.assign(n,vector<int>(n,0));
+            int ans2 = dfs(PY,PX, middle2, allHeights[i]);
+            if (ans2 == houseCount) {
+                diff = allHeights[i]-middle2;
+                c= middle2+1;
+            }
+            else {
+                d= middle2-1;
             }
         }
     }
+    
     // cout<<allHeights[maximum]<<endl;
     // cout<<allHeights[minimum]<<endl;
-    cout<<allHeights[maximum]-allHeights[minimum]<<"\n";
+    cout<<diff<<endl;
     return 0;
 }

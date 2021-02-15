@@ -18,7 +18,6 @@ int main() {
         }
     }
     dist[1][1] = 0;
-    cout<<dist[1][2]<<endl;
     q.push(make_pair(1,1));
     while(!q.empty()) {
         pair<int,int> pii = q.front();

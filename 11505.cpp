@@ -6,11 +6,12 @@ int sz;
 typedef long long ll;
 vector<ll> tree;
 
-int getMult(int loc) {
+long long getMult(int loc) {
     if (loc >= tree.size()) return 1;
     if (tree[loc] != 1) return tree[loc];
     else {
         tree[loc] = getMult(loc*2) * getMult(loc*2+1);
+        tree[loc] %= 1000000007;
         return tree[loc];
     }
 }

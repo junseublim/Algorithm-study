@@ -87,14 +87,14 @@ int bfs() {
                 }
             }
         }
-        cout<<"year: "<<nxt.year<<endl;
-        for (int i =1; i<=n; i++) {
-            for (int j =1; j<=n; j++) {
-                if (world[i][j] == 0) cout<<0<<" "; 
-                else cout<<find(world[i][j])->parent->num<<" ";
-            }
-            cout<<endl;
-        }
+        // cout<<"year: "<<nxt.year<<endl;
+        // for (int i =1; i<=n; i++) {
+        //     for (int j =1; j<=n; j++) {
+        //         if (world[i][j] == 0) cout<<0<<" "; 
+        //         else cout<<find(world[i][j])->parent->num<<" ";
+        //     }
+        //     cout<<endl;
+        // }
         if (checkIntegrated()) return nxt.year;
     }
 }

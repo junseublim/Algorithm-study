@@ -52,6 +52,5 @@ int main() {
     // for (int i=0; i<n; i++) {
     //     cout<<maximums[i]<<" ";
     // }
-    cout<<endl;
     cout<<*max_element(maximums.begin(), maximums.end())<<"\n";
 }

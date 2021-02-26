@@ -19,9 +19,6 @@ int main() {
             room[r][c] = 2;
             cnt = 0;
             cleaned++;
-            //
-            cout<<"cleaned : "<<r<<c<<endl;
-
         }
         if (cnt == 4) {
             if (d == 0) {
@@ -41,6 +38,7 @@ int main() {
                 else break;
             }
             cnt = 0;
+
         }
         if (d == 0 ){
             if (c-1 > 0 && room[r][c-1] == 0) {
@@ -82,13 +80,6 @@ int main() {
                 cnt++;
             }
         }
-    }
-    for (int i =0; i<n; i++) {
-        for (int j=0; j<m; j++) {
-            cout<<room[i][j]<< " ";
-        }
-        cout<<endl;
-
     }
     cout<<cleaned<<endl;
 

@@ -16,8 +16,8 @@ char dragon(const string& s, int gen, int skip) {
     }
     for (int i = 0; i<s.size(); i++) {
         if (s[i] == 'X' || s[i] == 'Y') {
-            if (skip >= length[gen]+1) {
-                skip -= length[gen]+1;
+            if (skip >= length[gen]) {
+                skip -= length[gen];
             }
             else if (s[i] == 'X')
                 return dragon(EXPAND_X, gen-1, skip);
@@ -37,7 +37,7 @@ char dragon(const string& s, int gen, int skip) {
 void preCalc() {
     length[0] = 1;
     for (int i =1; i<51; i++) {
-        length[i] = max(length[i-1] * 2 +2, MAX);
+        length[i] = min(length[i-1] * 2 +2, MAX);
     }
 }
 
@@ -49,7 +49,7 @@ int main() {
         cin>>n>>p>>l;
         string temp = "";
         for (int i =0; i<l; i++) {
-            temp+=dragon("FX", n, p+i);
+            temp+=dragon("FX", n, p+i-1);
         }
         cout<<temp<<"\n";
     }

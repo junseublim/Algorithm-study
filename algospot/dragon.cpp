@@ -10,7 +10,6 @@ const string EXPAND_X = "X+YF";
 const string EXPAND_Y = "FX-Y";
 
 char dragon(const string& s, int gen, int skip) {
-    cout<<s<<" "<<gen<<" "<<skip<<endl;
     if (gen == 0) {
         return s[skip];
     }

@@ -67,6 +67,6 @@ int main() {
             }
         }
         solve(0);
-        cout<<minV<<endl;
+        cout<<minV<<"\n";
     }
 }

@@ -4,7 +4,7 @@ using namespace std;
 typedef pair<int,int> pii;
 int n;
 vector<pii > v;
-int dp[100];
+int dp[101];
 int main() {
     cin>>n;
     for (int i =0; i<n; i++) {
@@ -27,9 +27,5 @@ int main() {
             dp[l+1] = v[i].second;
         }   
     }
-    for (int i =0; i<n; i++) {
-        cout<<dp[i]<<" ";
-    }
-    cout<<endl;
     cout<<n-maxLength<<endl;
 }

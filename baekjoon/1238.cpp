@@ -7,6 +7,7 @@ typedef pair<int,int> pii;
 
 vector<pii> adj [1001];
 
+
 int dijkstra(int s, int d) {
     priority_queue<pii, vector<pii>, greater<pii> > pq;
     pq.push(make_pair(s,0));
@@ -14,12 +15,16 @@ int dijkstra(int s, int d) {
     minDist[s] = 0;
     while(!pq.empty()) {
         pii curr = pq.top();
+        int dest = curr.first;
+        int weight = curr.second;
         pq.pop();
-        if (minDist[curr.first] < curr.second) continue;
-        minDist[curr.first] = curr.second;
-        for(int j =0; j<adj[curr.first].size(); j++) {
-            if (adj[curr.first][j].second + minDist[curr.first] < minDist[adj[curr.first][j].first] ) {
-                pq.push(make_pair(adj[curr.first][j].first, adj[curr.first][j].second + minDist[curr.first]));
+        if (minDist[dest] < weight) continue;
+        for(int j =0; j<adj[dest].size(); j++) {
+            int neighbor = adj[dest][j].first;
+            int neighborDist = weight + adj[dest][j].second;
+            if (minDist[neighbor] > neighborDist) {
+                minDist[neighbor] = neighborDist;
+                pq.push(make_pair(neighbor,neighborDist));
             }
         }
     }
@@ -31,14 +36,31 @@ int main() {
     cin.tie(0);
     cout.tie(0);
     cin>>n>>m>>k;
+    vector<int> kminDist (n+1, INF);
     for (int i=0;i<m;i++) {
         int s,d,w;
         cin>>s>>d>>w;
         adj[s].push_back(make_pair(d,w));
     }
+    priority_queue<pii, vector<pii>, greater<pii> > pq;
+    pq.push(make_pair(k,0));
+    kminDist[k] = 0;
+    while(!pq.empty()) {
+        pii curr = pq.top();
+        int dest = curr.first;
+        int weight = curr.second;
+        pq.pop();
+        if (kminDist[dest] < weight) continue;
+        kminDist[dest] = weight;
+        for(int j =0; j<adj[dest].size(); j++) {
+            if (adj[dest][j].second + kminDist[dest] < kminDist[adj[dest][j].first] ) {
+                pq.push(make_pair(adj[dest][j].first, adj[dest][j].second + kminDist[dest]));
+            }
+        }
+    }
     int mx = 0;
     for (int i=1; i<=n;i++) {
-        mx = max(dijkstra(i,k) + dijkstra(k,1), mx);
+        mx = max(dijkstra(i,k) + kminDist[i], mx);
     }
     cout<<mx<<"\n";
 

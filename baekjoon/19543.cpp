@@ -3,43 +3,69 @@
 using namespace std;
 int n,m,k;
 string rows[26];
+vector<int> v[26];
 string mapper;
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
     cin>>n>>m>>k;
     for (int i =0; i<k;i++) {
         cin>>rows[i];
+        for (int j = 0; j<m; j++) {
+            if (rows[i][j] == 'U') {
+                v[i].push_back(j);
+            }
+        }
     }
     cin>>mapper;
-    int cnt = 0;
-    int s =0,e= m-1;
-    for (int i =0; i<n; i++) {
-        string curr = rows[k-1-(mapper[i]-'A')];
-        if (i == 0) {
-            for (int j =m-2; j >=0; j--) {
-                if (curr[j] != 'R') {
-                    s = j+1;
-                    break;
-                }
+    long long cnt = 0;
+    int s= 0, e= m-1;
+    for (int i = m-2; i>=0; i--) {
+        if (rows[mapper[n-1]-'A'][i] == 'U') {
+            s = i+1;
+            break;
+        }
+    }
+    cnt += (long long)e-(long long)s+1;
+    for (int i =1; i<n; i++) {
+        int idx = mapper[n-1-i]-'A';
+        if (v[idx].empty()) {
+            break;
+        }
+        int start = 0, end = v[idx].size()-1;
+        int temp = -1;
+        int mid;
+        while (start <= end) {
+            mid = (start+end)/2;
+            if (v[idx][mid] < s) {
+                start = mid+1;
             }
-            cnt += (e-s+1);
-            cout<<e<<" "<<s<<endl;
-            continue;
+            else {
+                temp = mid;
+                end = mid-1;
+            }
         }
-        int ee = e;
-        while (ee>0 && curr[ee] == 'R') {
-            ee--;
+        if (temp == -1) break;
+        s = temp;
+        if (s != 0) {
+            s = v[idx][s-1]+1;
         }
-        int ss = ee;
-        while (ss > 0 && (curr[ss] == 'R' || (curr[ss] == 'U'  &&  s <= ss))) {
-            ss--;
+        start = 0, end = v[idx].size()-1;
+        temp = -1;
+        while (start <= end) {
+            mid = (start+end)/2;
+            if (v[idx][mid] > e) {
+                end = mid-1;
+            }
+            else {
+                temp = mid;
+                start = mid+1;
+            }
         }
-        cnt += (ee-ss+1);
-        e= ee;
-        s= ss;
-
-        cout<<e<<" "<<s<<endl;
+        if (temp == -1) break;
+        e = v[idx][temp];
+        cnt += (long long)e-(long long)s+1;
     }
     cout<<cnt<<"\n";
     return 0;

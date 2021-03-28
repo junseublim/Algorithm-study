@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int arr[100000];
+int arr[100001];
 
 int main() {
     ios::sync_with_stdio(0);
@@ -13,7 +13,7 @@ int main() {
     }
     int i =0, j= n-1;
     int ai, aj;
-    int mn =987654321;
+    int mn = 2000000000;
     while (i <j) {
         int temp = arr[i]+arr[j];
         if (abs(temp) < mn) {

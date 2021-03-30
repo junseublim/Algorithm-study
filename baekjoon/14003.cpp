@@ -43,7 +43,7 @@ int main (){
     int curr = longest;
     stack<int> st;
     for (int i = k; i > 0; i--) {
-        cout<<"num["<<i<<"] = "<<nums[i]<<" pos : "<<pos[i]<<endl;
+        //cout<<"num["<<i<<"] = "<<nums[i]<<" pos : "<<pos[i]<<endl;
         if (pos[i] == curr) {
             st.push(nums[i]);
             curr--;

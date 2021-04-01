@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-int numbers[10000001];
+bool numbers[10000001];
 int cache[10000001];
 int minFactor[10000001];
 int minFactorCnt[10000001];
@@ -13,16 +13,16 @@ int main() {
     cin>>C; 
     cache[1] = 1;
     for (int i =2; i<10000001; i++) {
-        if (numbers[i] == 1) {
+        if (numbers[i] == true) {
             continue;
         }
         cache[i] = 2;
         int cnt = 1;
         minFactorCnt[i] = 1;
-        numbers[i] = 1;
+        numbers[i] = true;
         minFactor[i] = i;
         for (int j = i+i; j<10000001; j+=i) {
-            numbers[j] = 1;
+            numbers[j] = true;
             minFactor[j] = i;
         }
     }

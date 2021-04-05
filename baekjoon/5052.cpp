@@ -40,7 +40,6 @@ int main() {
                 break;
             }
             string a = vs[i];
-            cout<<a<<endl;
             Node* next = root;
             for(int j =0; j<a.size(); j++) {
                 int found = 0;

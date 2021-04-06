@@ -2,8 +2,7 @@
 
 using namespace std;
 int n,s;
-int smaller[1048576];
-int bigger[1048576];
+
 
 int nums[40];
 
@@ -18,6 +17,7 @@ int main(){
     }
     int half = n / 2;
     int smallSize = (1 << (n - half)), bigSize = (1 << half);
+    vector<int> smaller(smallSize), bigger(bigSize);
     for (int i = 0; i < smallSize; ++i)
         for (int j = 0; j < n - half; ++j)
             if (i & (1 << j)) smaller[i] += nums[j];
@@ -26,10 +26,9 @@ int main(){
         for (int j = 0; j < half; ++j)
             if (i & (1 << j)) bigger[i] += nums[j + (n - half)];
 
-    sort(smaller, smaller+smallSize);
-    sort(bigger, bigger+bigSize);
+    sort(smaller.begin(), smaller.end());
+    sort(bigger.begin(), bigger.end());
     int i =0, j = bigSize-1;
-    int ii,jj;
     while ( i < smallSize && j >= 0) {
         int val = smaller[i] + bigger[j];
         if (val == s) {
@@ -40,7 +39,7 @@ int main(){
                 i++;
                 countFront++;
             }
-            while (j < bigSize && bigger[j] == bigger[j + 1]) {
+            while (j >=0 && bigger[j] == bigger[j + 1]) {
                 j--;
                 countBack++;
             }
@@ -55,6 +54,4 @@ int main(){
     }
     if (s == 0) cnt--;
     cout<<cnt<<"\n";
-
-
 }

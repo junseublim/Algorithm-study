@@ -29,6 +29,9 @@ int bfs(int y, int x) {
         else if (visited[nxt.y][nxt.x] == 2 && nxt.broke == 1) {
             continue;
         } 
+
+        visited[nxt.y][nxt.x] = nxt.broke+1;
+
         if (vs[nxt.y][nxt.x] == '1')
         {
             if (nxt.broke == 0) {
@@ -36,7 +39,7 @@ int bfs(int y, int x) {
             }
             else continue;
         }
-        else visited[nxt.y][nxt.x] = nxt.broke+1;
+        
         if (nxt.y == n-1 && nxt.x == m-1) {
             return nxt.t;
         }

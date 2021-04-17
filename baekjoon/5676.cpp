@@ -28,10 +28,10 @@ int zeroGo(int s, int e, int left, int right, int idx) {
         return zeros[idx];
     }
     if (s <= mid) {
-        val += zeroGo(s, mid, left, mid,idx*2);
+        val += zeroGo(s, min(e,mid), left, mid,idx*2);
     }
     if (e > mid) {
-        val += zeroGo(mid+1, e, mid+1, right, idx*2+1);
+        val += zeroGo(max(s, mid+1), e, mid+1, right, idx*2+1);
     }
     return val;
 }

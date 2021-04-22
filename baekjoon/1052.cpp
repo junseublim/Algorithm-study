@@ -31,7 +31,8 @@ int main() {
         smallest = getSmallest(n);
         secondSmall = getSmallest(n & ~smallest);
         cnt += secondSmall - smallest;
-        n &= ~smallest;
+        n-= smallest;
+        n += secondSmall;
 
     }   
     cout<<cnt<<endl;

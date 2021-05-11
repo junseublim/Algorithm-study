@@ -61,7 +61,7 @@ int main() {
     int year = 0;
     while(true) {
         int checked = check();
-        cout<<year<<" "<<checked<<endl;
+        //cout<<year<<" "<<checked<<endl;
         if (checked >= 2) {
             break;
         }
